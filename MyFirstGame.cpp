@@ -2,18 +2,45 @@
 #include <iostream>
 #include <string>
 #include <ctime>
+
+
+// Prompt To GameOver Screen
+void EndOfGame()
+{
+
+}
+
+void Damage()
+{
+    int Health = 10;
+    const int MinHealth = 0;
+
+    if(Health <= MinHealth)
+    {
+        EndOfGame();
+    }
+
+}
+
+
 void PrintIntroduction(int Difficulty)
 {
+    int Damage = 70;
     // Printing Out A Text To The Output Also Known As Expression Statements
     std::cout << "\n\nYou Are Being Chased By A Dinosaur Your Level Is: " << Difficulty;
     std::cout << "\n";
     std::cout << " You Need To Run As Quickly As Possible\n\n";
     std::cout << "\n";
+
+    // for(Damage; Damage >= 0; Damage--)
+    // {
+    //     std::cout << Damage << " ";
+    // }
 }
 bool PlayGame(int Difficulty)
 {
      PrintIntroduction(Difficulty);
-
+    Damage();
     
     // This is Where We Declare Our Variables and Making The Variables value randomize so we used rand() and we also made the difficulty harder
     // so we put % Difficulty + Difficulty
@@ -37,12 +64,14 @@ bool PlayGame(int Difficulty)
     std::cin >> GuessC;
     int GuessSum = GuessA + GuessB + GuessC;
     int GuessProduct = GuessA * GuessB * GuessC;
-    float Health = 100;
+    int Health = 10;
+    const int MinHealth = 0;
     std::cout << "Your Guess Is: " << GuessA << GuessB << GuessC << std::endl;
     // Checking if GuessSum and CodeSum Are Equal and Checking GuessProduct And CodeProduct Are Equal Also
-    if(GuessSum == CodeSum && GuessProduct == CodeProduct)
+     if(GuessSum == CodeSum && GuessProduct == CodeProduct)
     {
         std::cout << "\nCongratulation! You Win!\n";
+        std::cout << "You Have " << Health << " Health" << " Left";
         return true;
     }
     
@@ -50,10 +79,13 @@ bool PlayGame(int Difficulty)
     // To The Terminal You Lose!!! Better Luck Next Time!
     else
 {
+    Damage();
     std::cout << "\nYou Lose!!! Better Luck Next Time!\n";
-    std::cout << "You Have " << --Health << " Left";
+    
     return false;
 }
+
+
 
 }
 
@@ -68,7 +100,6 @@ int main()
       bool bLevelCompleted = PlayGame(LevelDifficulty);
        std::cin.clear(); // Clears Any Errors
        std::cin.ignore(); // Discards The Buffer
-
        if (bLevelCompleted)
        {
            ++LevelDifficulty;
